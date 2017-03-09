@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wolf.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosobliv <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/02/27 19:01:22 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:47:12 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,59 @@
 # define WOLF_H
 # define WIN_X 1024
 # define WIN_Y 768
-# define THRUE_CHAR(c) ((((c) >= '0') && ((c) <= '9')) ? 1 : 0)
+# define TEX_X 64
+# define TEX_Y 64
+# define THRUE_CHAR(c) (((((c) >= '0') && ((c) <= '9')) || c == 'p') ? 1 : 0)
 
+# define MAP_X	wolf->mapa.map_x
+# define MAP_Y	wolf->mapa.map_y
+# define STEP_X wolf->mapa.step_x
+# define STEP_Y wolf->mapa.step_y
+# define LINE_H wolf->mapa.line_height
+# define D_P_WALL wolf->mapa.perpwalldist
+# define SIDE_DIS_X wolf->mapa.sidedist.x
+# define SIDE_DIS_Y wolf->mapa.sidedist.y
+# define DELT_DIS_X wolf->mapa.deltadist.x
+# define DELT_DIS_Y wolf->mapa.deltadist.y
+# define DRAW_START wolf->mapa.draw_start
+# define DRAW_END wolf->mapa.draw_end
+# define RAY_POS_X wolf->ray.pos.x
+# define RAY_POS_Y wolf->ray.pos.y
+# define RAY_DIR_X wolf->ray.dir.x
+# define RAY_DIR_Y wolf->ray.dir.y
+# define PLR_POS_X wolf->plr.pos.x
+# define PLR_POS_Y wolf->plr.pos.y
+# define PLR_DIR_X wolf->plr.dir.x
+# define PLR_DIR_Y wolf->plr.dir.y
+# define MS wolf->move_speed
+# define RS wolf->rot_speed
+# define PLR_PL_X wolf->plr.plane.x
+# define PLR_PL_Y wolf->plr.plane.y
+# define MAP_SIDE wolf->mapa.side
 
 # include "../libft/libft.h"
 # include <math.h>
 # include "mlx.h"
 # include <fcntl.h>
+# include <time.h>
 
-# include <stdio.h>
+#include <stdio.h>
+
+typedef struct		s_key
+{
+	int				a;
+	int				s;
+	int				d;
+	int				w;
+}					t_key;
+
+typedef struct		s_img
+{
+	int				width;
+	int				height;
+	char			*buf;
+	void			*img;
+}					t_img;
 
 typedef struct		s_point
 {
@@ -30,23 +74,13 @@ typedef struct		s_point
 	double			y;
 }					t_point;
 
-typedef struct		s_draw
-{
-	int				deltax;
-	int				deltay;
-	int				signx;
-	int				signy;
-	int				error;
-	int				error2;
-	struct s_point	point1;
-	struct s_point	point2;
-}					t_draw;
-
 typedef struct		s_plr
 {
 	t_point			pos;
 	t_point			dir;
 	t_point			plane;
+	t_point			old_dir;
+	t_point			old_plane;
 }					t_plr;
 
 typedef struct		s_ray
@@ -82,24 +116,60 @@ typedef struct		s_wolf
 	int				map_len;
 	int				map_height;
 	int				i;
+	int				tex_num;
+	int				text_x;
+	int				text_y;
+	int				f_text_x;
+	int				f_text_y;
 
+	int				y;
+
+	int				xocolor;
+	int				ycolor;
+	int				xycolor;
+
+	double			dist_wall;
+	double			dist_plr;
+	double			dist_cur;
 	double			time;
 	double			old_time;
+	double			frametime;
+	double			wallx;
+	double			f_wallx;
+	double			f_wally;
+	double			move_speed;
+	double			rot_speed;
 
 	char			*program_name;
 	char			**map;
-	t_draw			draw;
+	char			buffer[WIN_X][WIN_Y];
+
 	t_plr			plr;
 	t_ray			ray;
 	t_map			mapa;
+	t_key			key;
+	t_img			*wall;
 }					t_wolf;
 
 void				ft_error(int code);
 void				read_map(char *map, t_wolf *wolf);
 int					ft_hooks(t_wolf *wolf);
+void				init_player(t_wolf *wolf);
+
+void				move_forward(t_wolf *wolf);
+void				move_backward(t_wolf *wolf);
+void				rotate_left(t_wolf *wolf);
+void				rotate_right(t_wolf *wolf);
+void				make_texture(t_wolf *wolf);
 void				raycasting(t_wolf *wolf);
-void				ft_draw_line(t_wolf *wolf, t_draw *draw, t_point *t0,
-						t_point *t1);
-void				draw_line2(t_wolf *wolf, int x, int y0, int y1);
+void				load_texture(t_wolf *wolf);
+
+int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);
+char				chmo(t_wolf *wolf, int y, int x);
+void				draw_floor(t_wolf *wolf, int x, int y);
+void				draw_floor_sel(t_wolf *wolf, int x);
+void				draw_line(t_wolf *wolf, int x, int y0, int y1);
+void				draw_texture(t_wolf *wolf, int x, int y0, int y1);
+void				ft_print_info(t_wolf *wolf);
 
 #endif

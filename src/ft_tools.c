@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_errors.c                                        :+:      :+:    :+:   */
+/*   ft_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosobliv <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:34:16 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/01 15:34:18 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/08 18:57:03 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,27 @@ void	ft_error(int code)
 {
 	if (code == 1)
 	{
-		ft_putendl("Wrong Map Length or Height...");
+		ft_putendl("\tWrong Map Length or Height...");
 		exit(1);
 	}
 	if (code == 2)
 	{
-		ft_putendl("Wrong Char...");
+		ft_putendl("\tWrong Char...");
 		exit(2);
 	}
 	if (code == 3)
 	{
-		ft_putendl("No Walls on side lines || All Char Walls...");
+		ft_putendl("\tNo Walls on side lines || All Char Walls...");
 		exit(3);
 	}
 	if (code == 4)
 	{
-		ft_putendl("Cannot open file...\n(Usage ./wolf3d [map_name].wolf)");
+		ft_putendl("\tCannot open file...\n(Usage ./wolf3d [map_name].wolf)");
 		exit(4);
 	}
 	if (code == 5)
 	{
-		ft_putendl("Usage ./wolf3d [map_name].wolf | Start");
+		ft_putendl("\tUsage ./wolf3d [map_name].wolf | Start");
 		exit(5);
 	}
 }
@@ -56,49 +56,84 @@ void	ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb)
 			(void *)&tmp, 4);
 }
 
-void	count_delta(t_point *t0, t_point *t1, t_draw *draw)
+int		ft_image_pixel_get(int x, int y, t_img *img,t_wolf *wolf)
 {
-	draw->deltax = fabs(t1->x - t0->x);
-	draw->deltay = fabs(t1->y - t0->y);
-	draw->signx = t1->x >= t0->x ? 1 : -1;
-	draw->signy = t1->y >= t0->y ? 1 : -1;
-	draw->error = draw->deltax - draw->deltay;
-	draw->error2 = 2 * draw->error;
+	int				bpp;
+	int				sl;
+	int				en;
+	char			*image;
+	unsigned int	tmp;
+
+	tmp = 0;
+	wolf->color = 0;
+	image = mlx_get_data_addr(img->img, &bpp, &sl, &en);
+	if (x >= 0 && x < img->width && y >= 0 && y < img->height)
+		ft_memcpy((void *)(&tmp), (void *)((image + y * img->width * (bpp / 8)) + x
+			* (bpp / 8)), 4);
+	return (tmp);
 }
 
-void	ft_draw_line(t_wolf *wolf, t_draw *draw, t_point *t0, t_point *t1)
+void	draw_texture(t_wolf *wolf, int x, int y0, int y1)
 {
-	int		x0;
-	int		y0;
+	int	d;
 
-	x0 = (int)t0->x;
-	y0 = (int)t0->y;
-	count_delta(t0, t1, draw);
-	ft_image_pixel_put(wolf, t1->x, t1->y, wolf->color);
-	while (t1->x != t0->x || t1->y != t0->y)
-	{
-		ft_image_pixel_put(wolf, t0->x, t0->y, wolf->color);
-		draw->error2 = draw->error * 2;
-		if (draw->error2 > -draw->deltay)
-		{
-			draw->error -= draw->deltay;
-			t0->x += draw->signx;
-		}
-		if (draw->error2 < draw->deltax)
-		{
-			draw->error += draw->deltax;
-			t0->y += draw->signy;
-		}
-	}
-	t0->x = x0;
-	t0->y = y0;
-}
-
-void	draw_line2(t_wolf *wolf, int x, int y0, int y1)
-{
+	d = 0;
 	while (y0 != y1)
 	{
+		d = (y0 << 8) - (WIN_Y << 7) + (LINE_H << 7); // optimize
+		wolf->text_y = ((d * TEX_Y) / LINE_H) >> 8;
+		wolf->color = ft_image_pixel_get(wolf->text_x, wolf->text_y, &wolf->wall[wolf->tex_num], wolf);
+		if (MAP_SIDE == 1)
+			wolf->color = (wolf->color >> 1) & 8355711;
 		ft_image_pixel_put(wolf, x, y0, wolf->color);
 		y0++;
+	}
+}
+
+void	draw_floor_sel(t_wolf *wolf, int x)
+{
+	double	cur_dis;
+	double	cur_fl_x;
+	double	cur_fl_y;
+	double	weght;
+	int		y;
+
+	if (DRAW_END < WIN_Y)
+		y = DRAW_END;
+	else
+		return ;
+	cur_dis = 0;
+	cur_fl_x = 0;
+	cur_fl_y = 0;
+	while (++y != WIN_Y)
+	{
+		cur_dis = WIN_Y / (2. * y - WIN_Y);
+		weght = (cur_dis - wolf->dist_plr) / (wolf->dist_wall - wolf->dist_plr);
+		cur_fl_x = weght * wolf->f_wallx + (1. - weght) * PLR_POS_X;
+		cur_fl_y = weght * wolf->f_wally + (1. - weght) * PLR_POS_Y;
+		wolf->f_text_x = ((int)(cur_fl_x * TEX_X)) % TEX_X;
+		wolf->f_text_y = ((int)(cur_fl_y * TEX_Y)) % TEX_Y;
+		wolf->color = ft_image_pixel_get(wolf->f_text_x, wolf->f_text_y, &wolf->wall[7], wolf);
+		ft_image_pixel_put(wolf, x, y, wolf->color);
+		wolf->f_text_x = ((int)(cur_fl_x * TEX_X)) % TEX_X;
+		wolf->f_text_y = ((int)(cur_fl_y * TEX_Y)) % TEX_Y;
+		wolf->color = ft_image_pixel_get(wolf->f_text_x, wolf->f_text_y, &wolf->wall[6], wolf);
+		ft_image_pixel_put(wolf, x, WIN_Y - y, wolf->color);
+	}
+}
+
+char	chmo(t_wolf *wolf, int y, int x)
+{
+	if ((y < 0 || x < 0) || x >= wolf->map_len || y >= wolf->map_height)
+		return(127);
+	return (wolf->map[y][x]);
+}
+
+void	draw_floor(t_wolf *wolf, int x, int y)
+{
+	while (y != WIN_Y)
+	{
+		ft_image_pixel_put(wolf, x, y, 16777011);
+		y++;
 	}
 }

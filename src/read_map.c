@@ -50,12 +50,12 @@ char	**make_arr(t_wolf *wolf, int fd)
 
 	i = 0;
 	j = 0;
-	tmp = (char **)malloc(sizeof(char *) * (wolf->map_height + 1));
-	tmp[wolf->map_height + 1] = NULL;
+	tmp = (char **)malloc(sizeof(char *) * (wolf->map_height));
+	tmp[wolf->map_height] = NULL;
 	while (get_next_line(fd, &line) == 1)
 	{
-		tmp[i] = (char *)malloc(sizeof(char) * (wolf->map_len + 1));
-		tmp[i][wolf->map_len + 1] = '\0';
+		tmp[i] = (char *)malloc(sizeof(char) * (wolf->map_len));
+		tmp[i][wolf->map_len] = '\0';
 		while (j != wolf->map_len)
 		{
 			tmp[i][j] = line[j];
@@ -105,11 +105,18 @@ void	wall_check(t_wolf *wolf)
 		while (++j != wolf->map_len)
 		{
 			printf("%c|", wolf->map[i][j]);
+			if (wolf->map[i][j] == 'p')
+			{
+				wolf->plr.pos.x = j + 0.5;
+				wolf->plr.pos.y = i + 0.5;
+				wolf->map[i][j] = '0';
+			}
 			if (wolf->map[i][j] != '1')
 				all_wall = 0;
 		}
 		printf("\n");
 	}
+	printf("Player pos = (%f;%f)\n", wolf->plr.pos.x, wolf->plr.pos.y);
 	if (all_wall == 1)
 		ft_error(3);
 	side_wall(wolf);
@@ -128,11 +135,6 @@ void	read_map(char *map, t_wolf *wolf)
 	if (wolf->map_len < 3 && wolf->map_height < 3)
 		ft_error(1);
 	wolf->map = make_arr(wolf, fd2);
-	if (wolf->map[1][1] != '0')
-	{
-		ft_putendl("Player start position occupied...");
-		exit(6);
-	}
 	wall_check(wolf);
 	printf("len_x=%d len_y=%d\n", wolf->map_len, wolf->map_height);
 }

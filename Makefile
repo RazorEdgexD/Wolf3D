@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aosobliv <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/08 13:28:10 by aosobliv          #+#    #+#              #
-#    Updated: 2017/03/01 18:50:31 by aosobliv         ###   ########.fr        #
+#    Updated: 2017/03/08 18:51:32 by aosobliv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ IDIR = includes/
 
 VPATH = src:includes
 
-FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g
+FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g #-O3
 
 MLX = -lmlx -framework AppKit -framework OpenGl
 
@@ -24,9 +24,12 @@ LIB = libft/libft.a
 
 SRCS = main.c									\
 		read_map.c								\
+		print_info.c							\
+		texture.c								\
 		ft_tools.c								\
 		ft_hooks.c								\
 		ft_raycasting.c							\
+		ft_move.c								\
 
 BINS = $(SRCS:.c=.o)
 
