@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/09 17:31:04 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/09 21:19:45 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,6 +164,7 @@ void				rotate_left(t_wolf *wolf);
 void				rotate_right(t_wolf *wolf);
 void				make_texture(t_wolf *wolf);
 void				raycasting(t_wolf *wolf);
+void				init_camera(t_wolf *wolf);
 void				load_texture(t_wolf *wolf);
 
 int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);

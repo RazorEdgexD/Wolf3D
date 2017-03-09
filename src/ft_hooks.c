@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/09 19:54:37 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/09 21:22:25 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ int		keys_press(int keycode, t_wolf *wolf)
 	{
 		if (wolf->map[MAP_Y][MAP_X] == '9')
 			wolf->map[MAP_Y][MAP_X] = '0';
+	}
+	if (keycode == 12)
+	{
+		if (wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X +
+			PLR_DIR_X)] == '0')
+			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 2 *
+				PLR_DIR_X)] = '9';
 	}
 	(keycode == 257) ? wolf->key.shf = 1 : 1488;
 	(keycode == 53) ? exit(777) : 1488;

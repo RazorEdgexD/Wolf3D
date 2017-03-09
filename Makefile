@@ -6,7 +6,7 @@
 #    By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/08 13:28:10 by aosobliv          #+#    #+#              #
-#    Updated: 2017/03/08 18:51:32 by aosobliv         ###   ########.fr        #
+#    Updated: 2017/03/09 20:09:52 by aosobliv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = main.c									\
 		print_info.c							\
 		texture.c								\
 		ft_tools.c								\
+		ft_tools2.c								\
 		ft_hooks.c								\
 		ft_raycasting.c							\
 		ft_move.c								\
