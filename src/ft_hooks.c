@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/08 18:47:46 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/09 19:54:37 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int		close_x(void *par)
 
 int		keys_release(int keycode, t_wolf *wolf)
 {
+	(keycode == 257) ? wolf->key.shf = 0 : 1488;
 	(keycode == 13) ? wolf->key.w = 0 : 1488;
 	(keycode == 1) ? wolf->key.s = 0 : 1488;
 	(keycode == 0) ? wolf->key.a = 0 : 1488;
@@ -30,6 +31,12 @@ int		keys_release(int keycode, t_wolf *wolf)
 
 int		keys_press(int keycode, t_wolf *wolf)
 {
+	if (keycode == 14)
+	{
+		if (wolf->map[MAP_Y][MAP_X] == '9')
+			wolf->map[MAP_Y][MAP_X] = '0';
+	}
+	(keycode == 257) ? wolf->key.shf = 1 : 1488;
 	(keycode == 53) ? exit(777) : 1488;
 	(keycode == 13) ? wolf->key.w = 1 : 1488;
 	(keycode == 1) ? wolf->key.s = 1 : 1488;
@@ -40,6 +47,8 @@ int		keys_press(int keycode, t_wolf *wolf)
 
 int		ft_hooks(t_wolf *wolf)
 {
+	(wolf->key.shf == 1) ? wolf->ms_k = 4.75 : 1488;
+	(wolf->key.shf == 0) ? wolf->ms_k = 3.5 : 1488;
 	(wolf->key.a == 1) ? rotate_left(wolf) : 1488;
 	(wolf->key.d == 1) ? rotate_right(wolf) : 1488;
 	(wolf->key.w == 1) ? move_forward(wolf) : 1488;

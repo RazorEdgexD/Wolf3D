@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/08 18:47:12 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/09 17:31:04 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct		s_key
 	int				s;
 	int				d;
 	int				w;
+	int				shf;
 }					t_key;
 
 typedef struct		s_img
@@ -138,6 +139,7 @@ typedef struct		s_wolf
 	double			f_wallx;
 	double			f_wally;
 	double			move_speed;
+	double			ms_k;
 	double			rot_speed;
 
 	char			*program_name;
