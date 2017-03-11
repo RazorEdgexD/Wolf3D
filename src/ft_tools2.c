@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:09:32 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/09 21:19:33 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/11 14:59:25 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_error(int code)
 
 char	chmo(t_wolf *wolf, int y, int x)
 {
-	if ((y < 0 || x < 0) || x >= wolf->map_len || y >= wolf->map_height)
+	if ((y < 0 || x < 0) || x >= wolf->map_len - 1|| y >= wolf->map_height - 1)
 		return (127);
 	return (wolf->map[y][x]);
 }
@@ -73,4 +73,26 @@ void	init_camera(t_wolf *wolf)
 	DRAW_END = 0;
 	wolf->tex_num = 0;
 	wolf->wallx = 0;
+}
+
+int		close_x(void *par)
+{
+	par = NULL;
+	exit(1);
+	return (0);
+}
+
+void	restart(t_wolf *wolf)
+{
+	free_mass(wolf);
+	wolf->start++;
+	wolf->men.menu = 0;
+	init_camera(wolf);
+	wolf->plr.dir.x = -1;
+	wolf->plr.dir.y = 0;
+	wolf->plr.plane.x = 0;
+	wolf->plr.plane.y = 0.66;
+	PLR_POS_X = wolf->plr.ch_pos.x;
+	PLR_POS_Y = wolf->plr.ch_pos.y;
+	wolf->map[(int)wolf->plr.ch_pos.y][(int)wolf->plr.ch_pos.x] = '0';
 }

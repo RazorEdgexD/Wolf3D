@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/09 21:19:45 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/11 14:41:36 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,12 @@
 
 #include <stdio.h>
 
+typedef struct		s_menu
+{
+	int				flag;
+	int				menu;
+}					t_menu;
+
 typedef struct		s_key
 {
 	int				a;
@@ -65,7 +71,6 @@ typedef struct		s_img
 {
 	int				width;
 	int				height;
-	char			*buf;
 	void			*img;
 }					t_img;
 
@@ -78,6 +83,8 @@ typedef struct		s_point
 typedef struct		s_plr
 {
 	t_point			pos;
+	t_point			ch_pos;
+	t_point			f_pos;
 	t_point			dir;
 	t_point			plane;
 	t_point			old_dir;
@@ -117,6 +124,7 @@ typedef struct		s_wolf
 	int				map_len;
 	int				map_height;
 	int				i;
+	int				start;
 	int				tex_num;
 	int				text_x;
 	int				text_y;
@@ -124,7 +132,6 @@ typedef struct		s_wolf
 	int				f_text_y;
 
 	int				y;
-
 	int				xocolor;
 	int				ycolor;
 	int				xycolor;
@@ -142,6 +149,7 @@ typedef struct		s_wolf
 	double			ms_k;
 	double			rot_speed;
 
+	char			**map_tmp;
 	char			*program_name;
 	char			**map;
 	char			buffer[WIN_X][WIN_Y];
@@ -149,15 +157,18 @@ typedef struct		s_wolf
 	t_plr			plr;
 	t_ray			ray;
 	t_map			mapa;
+	t_menu			men;
 	t_key			key;
 	t_img			*wall;
+	t_img			*menu;
 }					t_wolf;
 
 void				ft_error(int code);
 void				read_map(char *map, t_wolf *wolf);
 int					ft_hooks(t_wolf *wolf);
 void				init_player(t_wolf *wolf);
-
+void				init_wolf(t_wolf *wolf);
+char				**make_arr(t_wolf *wolf, int fd);
 void				move_forward(t_wolf *wolf);
 void				move_backward(t_wolf *wolf);
 void				rotate_left(t_wolf *wolf);
@@ -166,7 +177,9 @@ void				make_texture(t_wolf *wolf);
 void				raycasting(t_wolf *wolf);
 void				init_camera(t_wolf *wolf);
 void				load_texture(t_wolf *wolf);
-
+void				restart(t_wolf *wolf);
+void				free_mass(t_wolf *wolf);
+int					close_x(void *par);
 int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);
 char				chmo(t_wolf *wolf, int y, int x);
 void				draw_floor(t_wolf *wolf, int x, int y);

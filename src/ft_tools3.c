@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_tools3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/26 16:04:10 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/11 14:22:57 by aosobliv         ###   ########.fr       */
+/*   Created: 2017/03/11 14:10:13 by aosobliv          #+#    #+#             */
+/*   Updated: 2017/03/11 14:50:09 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "wolf.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+void	free_mass(t_wolf *wolf)
 {
-	char *arr;
+	int	i;
+	int	j;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	arr = ft_strnew(ft_strlen(s1) + ft_strlen(s2));
-	if (arr != NULL)
+	i = -1;
+	while (wolf->map_tmp[++i])
 	{
-		arr = ft_strcat(arr, s1);
-		arr = ft_strcat(arr, s2);
-		return (arr);
+		j = -1;
+		while (wolf->map_tmp[i][++j])
+		{
+			wolf->map[i][j] = wolf->map_tmp[i][j];
+		}
 	}
-	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:41:15 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/09 20:03:24 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/10 15:47:48 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,21 @@
 
 void	move_forward(t_wolf *wolf)
 {
-	if (wolf->map[(int)PLR_POS_Y][(int)(PLR_POS_X + PLR_DIR_X * MS + PLR_DIR_X *
-		0.4)] <= '0')
+	if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS + PLR_DIR_X *
+		0.4)) <= '0')
 		PLR_POS_X += PLR_DIR_X * MS;
-	if (wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y * MS + PLR_DIR_Y * 0.4)]
-		[(int)PLR_POS_X] <= '0')
+	if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y * MS + PLR_DIR_Y * 0.4),
+		(int)PLR_POS_X) <= '0')
 		PLR_POS_Y += PLR_DIR_Y * MS;
 }
 
 void	move_backward(t_wolf *wolf)
 {
-	if (wolf->map[(int)PLR_POS_Y][(int)(PLR_POS_X - PLR_DIR_X * MS - PLR_DIR_X
-		* 0.4)] <= '0')
+	if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS - PLR_DIR_X *
+		0.4)) <= '0')
 		PLR_POS_X -= PLR_DIR_X * MS;
-	if (wolf->map[(int)(PLR_POS_Y - PLR_DIR_Y * MS - PLR_DIR_Y * 0.4)]
-		[(int)PLR_POS_X] <= '0')
+	if (chmo(wolf, (int)(PLR_POS_Y - PLR_DIR_Y * MS - PLR_DIR_Y * 0.4),
+		(int)PLR_POS_X) <= '0')
 		PLR_POS_Y -= PLR_DIR_Y * MS;
 }
 

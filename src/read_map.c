@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aosobliv <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:20:11 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/01 15:20:13 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/11 14:31:37 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,19 @@ char	**make_arr(t_wolf *wolf, int fd)
 	i = 0;
 	j = 0;
 	tmp = (char **)malloc(sizeof(char *) * (wolf->map_height));
+	wolf->map_tmp = (char **)malloc(sizeof(char *) * (wolf->map_height));
 	tmp[wolf->map_height] = NULL;
+	wolf->map_tmp[wolf->map_height] = NULL;
 	while (get_next_line(fd, &line) == 1)
 	{
 		tmp[i] = (char *)malloc(sizeof(char) * (wolf->map_len));
+		wolf->map_tmp[i] = (char *)malloc(sizeof(char) * (wolf->map_len));
 		tmp[i][wolf->map_len] = '\0';
+		wolf->map_tmp[i][wolf->map_len] = '\0';
 		while (j != wolf->map_len)
 		{
 			tmp[i][j] = line[j];
+			wolf->map_tmp[i][j] = line[j];
 			j++;
 		}
 		j = 0;
@@ -136,5 +141,9 @@ void	read_map(char *map, t_wolf *wolf)
 		ft_error(1);
 	wolf->map = make_arr(wolf, fd2);
 	wall_check(wolf);
+	wolf->plr.f_pos.x = wolf->plr.pos.x;
+	wolf->plr.f_pos.y = wolf->plr.pos.y;
+	wolf->plr.ch_pos.x = wolf->plr.pos.x - 0.5;
+	wolf->plr.ch_pos.y = wolf->plr.pos.y - 0.5;
 	printf("len_x=%d len_y=%d\n", wolf->map_len, wolf->map_height);
 }

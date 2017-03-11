@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:04:22 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/09 20:31:42 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/11 14:24:30 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,9 @@ void	init_player(t_wolf *wolf)
 	wolf->old_time = 0;
 	wolf->move_speed = 0;
 	wolf->rot_speed = 0;
-	wolf->ms_k = 3.5;
+	wolf->ms_k = 3;
+	wolf->plr.f_pos.x = PLR_POS_X;
+	wolf->plr.f_pos.y = PLR_POS_Y;
 	if (PLR_POS_X == 0 && PLR_POS_Y == 0)
 	{
 		ft_putendl("\tNo player...\n\n\n\tAdd 'p' on map!");
@@ -33,12 +35,13 @@ void	init_player(t_wolf *wolf)
 void	init_wolf(t_wolf *wolf)
 {
 	wolf->map_len = 0;
+	wolf->start = 0;
 	wolf->map_height = 0;
 	wolf->color = 255;
+	wolf->men.menu = 1;
 	wolf->mlx = mlx_init();
 	wolf->win = mlx_new_window(wolf->mlx, WIN_X, WIN_Y, "Wolf3D by Razor");
 	wolf->image = mlx_new_image(wolf->mlx, WIN_X, WIN_Y);
-	load_texture(wolf);
 }
 
 int		main(int argc, char **argv)
@@ -48,9 +51,11 @@ int		main(int argc, char **argv)
 	if (argc == 2)
 	{
 		wolf.i = -1;
+		wolf.men.flag = 0;
 		init_wolf(&wolf);
 		read_map(argv[1], &wolf);
 		init_player(&wolf);
+		load_texture(&wolf);
 		mlx_loop_hook(wolf.mlx, ft_hooks, &wolf);
 		mlx_loop(wolf.mlx);
 	}

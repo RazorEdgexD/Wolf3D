@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:33 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/09 21:21:30 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/10 19:55:25 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,9 @@ void	start_cast(t_wolf *wolf)
 	DRAW_END = LINE_H / 2 + WIN_Y / 2;
 	if (DRAW_END > WIN_Y)
 		DRAW_END = WIN_Y - 1;
-	wolf->tex_num = wolf->map[MAP_Y][MAP_X] - 1 - '0';
+	wolf->tex_num = chmo(wolf, MAP_Y, MAP_X) - 1 - '0';
+	if (wolf->tex_num == 126 - '0')
+		wolf->tex_num = 1;
 	if (MAP_SIDE == 0)
 		wolf->wallx = RAY_POS_Y + D_P_WALL * RAY_DIR_Y;
 	else
