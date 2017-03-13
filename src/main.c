@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:04:22 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/11 14:24:30 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/13 18:05:52 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,43 @@ void	init_wolf(t_wolf *wolf)
 	wolf->image = mlx_new_image(wolf->mlx, WIN_X, WIN_Y);
 }
 
+void	*music(void *lol)
+{
+	lol = NULL;
+	while (1)
+	{
+		system("afplay music/help.mp3");
+		sleep(40);
+	}
+	return (NULL);
+}
+
+void	*music_start(void *lol)
+{
+	lol = NULL;
+	while (1)
+	{
+		system("afplay music/giran.mp3");
+		sleep(125);
+	}
+	return (NULL);
+}
+
+
+
 int		main(int argc, char **argv)
 {
-	t_wolf	wolf;
+	t_wolf		wolf;
+
 
 	if (argc == 2)
 	{
 		wolf.i = -1;
 		wolf.men.flag = 0;
+		wolf.mus = 1;
 		init_wolf(&wolf);
 		read_map(argv[1], &wolf);
+		pthread_create(&wolf.tread[1], NULL, music_start, NULL);
 		init_player(&wolf);
 		load_texture(&wolf);
 		mlx_loop_hook(wolf.mlx, ft_hooks, &wolf);

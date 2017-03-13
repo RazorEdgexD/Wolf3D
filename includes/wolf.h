@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/11 14:41:36 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/13 20:02:56 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # define WIN_Y 768
 # define TEX_X 64
 # define TEX_Y 64
+# define SPR 5
 # define THRUE_CHAR(c) (((((c) >= '0') && ((c) <= '9')) || c == 'p') ? 1 : 0)
 
 # define MAP_X	wolf->mapa.map_x
@@ -49,8 +50,11 @@
 # include "mlx.h"
 # include <fcntl.h>
 # include <time.h>
+# include <pthread.h>
 
 #include <stdio.h>
+
+typedef unsigned char	t_bool;
 
 typedef struct		s_menu
 {
@@ -79,6 +83,12 @@ typedef struct		s_point
 	double			x;
 	double			y;
 }					t_point;
+
+typedef struct		s_spr
+{
+	t_point			pos;
+	int				text_num;
+}					t_spr;
 
 typedef struct		s_plr
 {
@@ -130,12 +140,25 @@ typedef struct		s_wolf
 	int				text_y;
 	int				f_text_x;
 	int				f_text_y;
+	int				s_s_x;
+	int				spr_hei;
+	int				spr_wid;
+	int				dr_s_y;
+	int				dr_e_y;
+	int				dr_s_x;
+	int				dr_e_x;
+	int				stripe;
 
+	int				spriteorder[SPR];
+	int				mus;
 	int				y;
 	int				xocolor;
 	int				ycolor;
 	int				xycolor;
 
+	double			spritedistance[SPR];
+	double			sprite_x;
+	double			sprite_y;
 	double			dist_wall;
 	double			dist_plr;
 	double			dist_cur;
@@ -148,21 +171,28 @@ typedef struct		s_wolf
 	double			move_speed;
 	double			ms_k;
 	double			rot_speed;
+	double			intdev;
 
 	char			**map_tmp;
 	char			*program_name;
 	char			**map;
 	char			buffer[WIN_X][WIN_Y];
 
+	pthread_t		tread[2];
 	t_plr			plr;
 	t_ray			ray;
 	t_map			mapa;
+	t_point			trans;
 	t_menu			men;
 	t_key			key;
 	t_img			*wall;
 	t_img			*menu;
+	t_img			*spr;
+	t_spr			sprite[SPR];
 }					t_wolf;
 
+void				*music(void *lol);
+void 				sort(int *order, double *dist);
 void				ft_error(int code);
 void				read_map(char *map, t_wolf *wolf);
 int					ft_hooks(t_wolf *wolf);
@@ -180,10 +210,12 @@ void				load_texture(t_wolf *wolf);
 void				restart(t_wolf *wolf);
 void				free_mass(t_wolf *wolf);
 int					close_x(void *par);
+void				ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb);
 int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);
 char				chmo(t_wolf *wolf, int y, int x);
 void				draw_floor(t_wolf *wolf, int x, int y);
 void				draw_floor_sel(t_wolf *wolf, int x);
+void				draw_sprites(t_wolf *wolf, int x);
 void				draw_line(t_wolf *wolf, int x, int y0, int y1);
 void				draw_texture(t_wolf *wolf, int x, int y0, int y1);
 void				ft_print_info(t_wolf *wolf);

@@ -6,7 +6,7 @@
 #    By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/08 13:28:10 by aosobliv          #+#    #+#              #
-#    Updated: 2017/03/11 14:12:01 by aosobliv         ###   ########.fr        #
+#    Updated: 2017/03/13 18:21:40 by aosobliv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,6 +32,7 @@ SRCS = main.c									\
 		ft_hooks.c								\
 		ft_raycasting.c							\
 		ft_move.c								\
+		ft_sprites.c							\
 
 BINS = $(SRCS:.c=.o)
 

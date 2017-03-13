@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/11 14:32:12 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/13 17:46:03 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,15 @@ int		keys_press(int keycode, t_wolf *wolf)
 {
 	if (keycode == 14)
 	{
-		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 2 *
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
 			PLR_DIR_X)) == '9')
-			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 2 *
-				PLR_DIR_X)] = '0';
+			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
+				PLR_DIR_X)] = '+';
 	}
 	if (keycode == 12)
 	{
 		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)) == '2' || chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-				PLR_DIR_X)) == '3')
+			PLR_DIR_X)) == '+')
 			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
 				PLR_DIR_X)] = '9';
 	}
@@ -63,7 +62,9 @@ int		keys_menu(int key, t_wolf *wolf)
 	if (key == 36 && wolf->men.flag == 1)
 		ft_putendl("ABTOP Razorywka");
 	if (key == 36 && wolf->men.flag == 2)
+	{
 		exit(777);
+	}
 	return (1);
 }
 
