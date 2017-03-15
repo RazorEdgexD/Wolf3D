@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:33 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/14 16:28:50 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:55:30 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,6 @@ void	draw_floors(t_wolf *wolf)
 	if (DRAW_END < 0)
 		DRAW_END = WIN_Y;
 	draw_floor_sel(wolf, wolf->i);
-//	draw_sprites(wolf, wolf->i);
 }
 
 void	start_cast(t_wolf *wolf)

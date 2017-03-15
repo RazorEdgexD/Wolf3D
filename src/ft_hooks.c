@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/14 17:56:48 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:48:39 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ int		keys_press(int keycode, t_wolf *wolf)
 		else if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
 			PLR_DIR_X)) == '5')
 			{
-				restart(wolf, 29.5, 1.5);
-			//	wolf->k = 1;
+				if (wolf->lvl == 1)
+					restart(wolf, 29.5, 1.5, 2);
+				else if (wolf->lvl == 2)
+					restart(wolf, 40.5, 20.5, 3);
 			}
 	}
 	if (keycode == 12)
@@ -69,7 +71,7 @@ int		keys_menu(int key, t_wolf *wolf)
 	if (key == 126 && wolf->men.flag > 0)
 		wolf->men.flag -= 1;
 	if (key == 36 && wolf->men.flag == 0)
-		restart(wolf, 13.5, 12.5);
+		restart(wolf, 8.5, 8.5, 1);
 	if (key == 36 && wolf->men.flag == 1)
 		ft_putendl("ABTOP Razorywka");
 	if (key == 36 && wolf->men.flag == 2)

@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:09:32 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 13:17:44 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:06:56 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,19 +82,12 @@ int		close_x(void *par)
 	return (0);
 }
 
-void	restart(t_wolf *wolf, double x, double y)
+void	restart(t_wolf *wolf, double x, double y, int lvl)
 {
-	int	i;
-
-	i = -1;
-	//pthread_create(&wolf->tread[0], NULL, music, NULL);
+//	pthread_create(&wolf->tread[0], NULL, music, NULL);
 	free_mass(wolf);
 	wolf->men.menu = 0;
-	// mlx_destroy_image(wolf->mlx, wolf->menu[0].img);
-	// mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->load[0].img, 0, 0);
-	// 		sleep(2);
-	// wolf->menu[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/newgame.xpm",
-	// 	&wolf->menu[0].width, &wolf->menu[0].height);
+	wolf->lvl = lvl;
 	PLR_POS_X = x;
 	PLR_POS_Y = y;
 	init_camera(wolf);

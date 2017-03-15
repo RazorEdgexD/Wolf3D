@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/21 11:25:50 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/11 14:20:49 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:25:01 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-# define BUFF_SIZE 9999
+# define BUFF_SIZE 64
 
 void				ft_putchar(char c);
 void				ft_putchar_fd(char c, int fd);

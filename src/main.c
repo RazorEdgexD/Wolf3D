@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:04:22 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 15:54:46 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 18:06:45 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,6 @@ void	init_player(t_wolf *wolf)
 	wolf->move_speed = 0;
 	wolf->rot_speed = 0;
 	wolf->ms_k = 3;
-	wolf->plr.f_pos.x = PLR_POS_X;
-	wolf->plr.f_pos.y = PLR_POS_Y;
-	if (PLR_POS_X == 0 && PLR_POS_Y == 0)
-	{
-		ft_putendl("\tNo player...\n\n\n\tAdd 'p' on map!");
-		exit(111);
-	}
 }
 
 void	init_wolf(t_wolf *wolf)
@@ -39,9 +32,9 @@ void	init_wolf(t_wolf *wolf)
 	wolf->map_height = 0;
 	wolf->color = 255;
 	wolf->men.menu = 1;
-	wolf->k = 1;
-	PLR_POS_X = 13.5;
-	PLR_POS_Y = 12.5;
+	wolf->lvl = 1;
+	PLR_POS_X = 1.5;
+	PLR_POS_Y = 1.5;
 	wolf->mlx = mlx_init();
 	wolf->win = mlx_new_window(wolf->mlx, WIN_X, WIN_Y, "Wolf3D by Razor");
 	wolf->image = mlx_new_image(wolf->mlx, WIN_X, WIN_Y);

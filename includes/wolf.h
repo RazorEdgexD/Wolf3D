@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/14 17:32:11 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 20:16:36 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,7 @@ typedef struct		s_wolf
 	int				spriteorder[SPR];
 	int				mus;
 	int				y;
-	int				k;
+	int				lvl;
 	int				xocolor;
 	int				ycolor;
 	int				xycolor;
@@ -180,6 +180,7 @@ typedef struct		s_wolf
 	char			*program_name;
 	char			**map;
 	char			buffer[WIN_X][WIN_Y];
+	char			*hint[4];
 
 	pthread_t		tread[2];
 	t_plr			plr;
@@ -202,7 +203,7 @@ void				read_map(char *map, t_wolf *wolf);
 int					ft_hooks(t_wolf *wolf);
 void				init_player(t_wolf *wolf);
 void				init_wolf(t_wolf *wolf);
-char				**make_arr(t_wolf *wolf, int fd);
+void				make_arr(t_wolf *wolf, int fd);
 void				move_left_right(t_wolf *wolf, int i);
 void				move_forward_back(t_wolf *wolf, int i);
 void				rotate_left(t_wolf *wolf);
@@ -211,7 +212,7 @@ void				make_texture(t_wolf *wolf);
 void				raycasting(t_wolf *wolf);
 void				init_camera(t_wolf *wolf);
 void				load_texture(t_wolf *wolf);
-void				restart(t_wolf *wolf, double x, double y);
+void				restart(t_wolf *wolf, double x, double y, int lvl);
 void				free_mass(t_wolf *wolf);
 int					close_x(void *par);
 void				ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb);
@@ -219,7 +220,6 @@ int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);
 char				chmo(t_wolf *wolf, int y, int x);
 void				draw_floor(t_wolf *wolf, int x, int y);
 void				draw_floor_sel(t_wolf *wolf, int x);
-void				draw_sprites(t_wolf *wolf, int x);
 void				draw_line(t_wolf *wolf, int x, int y0, int y1);
 void				draw_texture(t_wolf *wolf, int x, int y0, int y1);
 void				ft_print_info(t_wolf *wolf);

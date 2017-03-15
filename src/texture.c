@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 20:05:34 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/14 16:58:46 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:18:47 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	load_walls(t_wolf *wolf)
 {
-	wolf->wall = (t_img *)malloc(sizeof(t_img) * 9);
+	wolf->wall = (t_img *)malloc(sizeof(t_img) * 17);
 	wolf->wall[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/e18.xpm",
 		&wolf->wall[0].width, &wolf->wall[0].height);
 	wolf->wall[1].img = mlx_xpm_file_to_image(wolf->mlx, "texture/wall_1.xpm"
@@ -50,18 +50,22 @@ void	load_menu(t_wolf *wolf)
 
 void	load_sprite(t_wolf *wolf)
 {
-	wolf->spr = (t_img *)malloc(sizeof(t_img) * 3);
-	wolf->spr[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/pillar.xpm",
-		&wolf->menu[0].width, &wolf->menu[0].height);
-	wolf->spr[1].img = mlx_xpm_file_to_image(wolf->mlx, "texture/greenligh.xpm"
-		, &wolf->menu[1].width, &wolf->menu[1].height);
-	wolf->spr[2].img = mlx_xpm_file_to_image(wolf->mlx,
-		"texture/pillar.xpm", &wolf->menu[2].width, &wolf->menu[2].height);
-	wolf->load = (t_img *)malloc(sizeof(t_img) * 2);
-	wolf->load[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/load.xpm",
-		&wolf->load[0].width, &wolf->load[0].height);
-	wolf->load[1].img = mlx_xpm_file_to_image(wolf->mlx, "texture/load_load.xpm"
-		, &wolf->load[1].width, &wolf->load[1].height);
+	wolf->wall[9].img = mlx_xpm_file_to_image(wolf->mlx, "texture/dim.xpm",
+		&wolf->wall[9].width, &wolf->wall[9].height);
+	wolf->wall[10].img = mlx_xpm_file_to_image(wolf->mlx, "texture/pet.xpm"
+		, &wolf->wall[10].width, &wolf->wall[10].height);
+	wolf->wall[11].img = mlx_xpm_file_to_image(wolf->mlx,
+		"texture/vil.xpm", &wolf->wall[11].width, &wolf->wall[11].height);
+	wolf->wall[12].img = mlx_xpm_file_to_image(wolf->mlx, "texture/kos.xpm",
+		&wolf->wall[12].width, &wolf->wall[12].height);
+	wolf->wall[13].img = mlx_xpm_file_to_image(wolf->mlx,
+		"texture/vov.xpm", &wolf->wall[13].width, &wolf->wall[13].height);
+	wolf->wall[14].img = mlx_xpm_file_to_image(wolf->mlx, "texture/san.xpm",
+		&wolf->wall[14].width, &wolf->wall[14].height);
+	wolf->wall[15].img = mlx_xpm_file_to_image(wolf->mlx,
+		"texture/purplestone.xpm", &wolf->wall[15].width, &wolf->wall[15].height);
+	wolf->wall[16].img = mlx_xpm_file_to_image(wolf->mlx, "texture/mossy.xpm",
+		&wolf->wall[16].width, &wolf->wall[16].height);
 }
 
 void	load_texture(t_wolf *wolf)

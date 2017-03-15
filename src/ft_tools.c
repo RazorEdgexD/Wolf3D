@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:34:16 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/14 16:26:54 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 19:01:31 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,6 @@ void	draw_texture(t_wolf *wolf, int x, int y0, int y1)
 		wolf->text_y = ((d * TEX_Y) / LINE_H) >> 8;
 		wolf->color = ft_image_pixel_get(wolf->text_x, wolf->text_y,
 			&wolf->wall[wolf->tex_num], wolf);
-		if (MAP_SIDE == 1)
-			wolf->color = (wolf->color >> 1) & 8355711;
 		ft_image_pixel_put(wolf, x, y0, wolf->color);
 		y0++;
 	}
