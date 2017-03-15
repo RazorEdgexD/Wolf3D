@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:20:11 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/11 14:31:37 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/14 17:45:44 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,6 @@ void	wall_check(t_wolf *wolf)
 		while (++j != wolf->map_len)
 		{
 			printf("%c|", wolf->map[i][j]);
-			if (wolf->map[i][j] == 'p')
-			{
-				wolf->plr.pos.x = j + 0.5;
-				wolf->plr.pos.y = i + 0.5;
-				wolf->map[i][j] = '0';
-			}
 			if (wolf->map[i][j] != '1')
 				all_wall = 0;
 		}
@@ -141,9 +135,5 @@ void	read_map(char *map, t_wolf *wolf)
 		ft_error(1);
 	wolf->map = make_arr(wolf, fd2);
 	wall_check(wolf);
-	wolf->plr.f_pos.x = wolf->plr.pos.x;
-	wolf->plr.f_pos.y = wolf->plr.pos.y;
-	wolf->plr.ch_pos.x = wolf->plr.pos.x - 0.5;
-	wolf->plr.ch_pos.y = wolf->plr.pos.y - 0.5;
 	printf("len_x=%d len_y=%d\n", wolf->map_len, wolf->map_height);
 }

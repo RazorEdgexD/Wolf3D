@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/13 20:02:56 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/14 17:32:11 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct		s_key
 	int				s;
 	int				d;
 	int				w;
+	int				l;
+	int				r;
 	int				shf;
 }					t_key;
 
@@ -152,6 +154,7 @@ typedef struct		s_wolf
 	int				spriteorder[SPR];
 	int				mus;
 	int				y;
+	int				k;
 	int				xocolor;
 	int				ycolor;
 	int				xycolor;
@@ -187,27 +190,28 @@ typedef struct		s_wolf
 	t_key			key;
 	t_img			*wall;
 	t_img			*menu;
+	t_img			*load;
 	t_img			*spr;
 	t_spr			sprite[SPR];
 }					t_wolf;
 
 void				*music(void *lol);
-void 				sort(int *order, double *dist);
+void				sort(int *order, double *dist);
 void				ft_error(int code);
 void				read_map(char *map, t_wolf *wolf);
 int					ft_hooks(t_wolf *wolf);
 void				init_player(t_wolf *wolf);
 void				init_wolf(t_wolf *wolf);
 char				**make_arr(t_wolf *wolf, int fd);
-void				move_forward(t_wolf *wolf);
-void				move_backward(t_wolf *wolf);
+void				move_left_right(t_wolf *wolf, int i);
+void				move_forward_back(t_wolf *wolf, int i);
 void				rotate_left(t_wolf *wolf);
 void				rotate_right(t_wolf *wolf);
 void				make_texture(t_wolf *wolf);
 void				raycasting(t_wolf *wolf);
 void				init_camera(t_wolf *wolf);
 void				load_texture(t_wolf *wolf);
-void				restart(t_wolf *wolf);
+void				restart(t_wolf *wolf, double x, double y);
 void				free_mass(t_wolf *wolf);
 int					close_x(void *par);
 void				ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb);

@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:09:32 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/13 16:00:56 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 13:17:44 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_error(int code)
 
 char	chmo(t_wolf *wolf, int y, int x)
 {
-	if ((y < 0 || x < 0) || x >= wolf->map_len - 1|| y >= wolf->map_height - 1)
+	if ((y < 0 || x < 0) || x >= wolf->map_len - 1 || y >= wolf->map_height - 1)
 		return (127);
 	return (wolf->map[y][x]);
 }
@@ -82,18 +82,24 @@ int		close_x(void *par)
 	return (0);
 }
 
-void	restart(t_wolf *wolf)
+void	restart(t_wolf *wolf, double x, double y)
 {
-	pthread_create(&wolf->tread[0], NULL, music, NULL);
+	int	i;
+
+	i = -1;
+	//pthread_create(&wolf->tread[0], NULL, music, NULL);
 	free_mass(wolf);
-	wolf->start++;
 	wolf->men.menu = 0;
+	// mlx_destroy_image(wolf->mlx, wolf->menu[0].img);
+	// mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->load[0].img, 0, 0);
+	// 		sleep(2);
+	// wolf->menu[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/newgame.xpm",
+	// 	&wolf->menu[0].width, &wolf->menu[0].height);
+	PLR_POS_X = x;
+	PLR_POS_Y = y;
 	init_camera(wolf);
 	wolf->plr.dir.x = -1;
 	wolf->plr.dir.y = 0;
 	wolf->plr.plane.x = 0;
 	wolf->plr.plane.y = 0.66;
-	PLR_POS_X = wolf->plr.ch_pos.x;
-	PLR_POS_Y = wolf->plr.ch_pos.y;
-	wolf->map[(int)wolf->plr.ch_pos.y][(int)wolf->plr.ch_pos.x] = '0';
 }

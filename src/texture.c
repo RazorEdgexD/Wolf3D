@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 20:05:34 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/13 18:33:26 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/14 16:58:46 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,11 @@ void	load_sprite(t_wolf *wolf)
 		, &wolf->menu[1].width, &wolf->menu[1].height);
 	wolf->spr[2].img = mlx_xpm_file_to_image(wolf->mlx,
 		"texture/pillar.xpm", &wolf->menu[2].width, &wolf->menu[2].height);
+	wolf->load = (t_img *)malloc(sizeof(t_img) * 2);
+	wolf->load[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/load.xpm",
+		&wolf->load[0].width, &wolf->load[0].height);
+	wolf->load[1].img = mlx_xpm_file_to_image(wolf->mlx, "texture/load_load.xpm"
+		, &wolf->load[1].width, &wolf->load[1].height);
 }
 
 void	load_texture(t_wolf *wolf)

@@ -6,30 +6,51 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:41:15 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/13 17:46:08 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/15 16:16:52 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void	move_forward(t_wolf *wolf)
+void	move_forward_back(t_wolf *wolf, int i)
 {
-	if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS + PLR_DIR_X *
-		0.4)) <= '0')
-		PLR_POS_X += PLR_DIR_X * MS;
-	if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y * MS + PLR_DIR_Y * 0.4),
-		(int)PLR_POS_X) <= '0')
-		PLR_POS_Y += PLR_DIR_Y * MS;
+	if (i == 1)
+	{
+		if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS + PLR_DIR_X *
+			0.4)) <= '0')
+			PLR_POS_X += PLR_DIR_X * MS;
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y * MS + PLR_DIR_Y * 0.4),
+			(int)PLR_POS_X) <= '0')
+			PLR_POS_Y += PLR_DIR_Y * MS;
+	}
+	else
+	{
+		if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS - PLR_DIR_X *
+			0.4)) <= '0')
+			PLR_POS_X -= PLR_DIR_X * MS;
+		if (chmo(wolf, (int)(PLR_POS_Y - PLR_DIR_Y * MS - PLR_DIR_Y * 0.4),
+			(int)PLR_POS_X) <= '0')
+			PLR_POS_Y -= PLR_DIR_Y * MS;
+		}
 }
 
-void	move_backward(t_wolf *wolf)
+void	move_left_right(t_wolf *wolf, int i)
 {
-	if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS - PLR_DIR_X *
-		0.4)) <= '0')
-		PLR_POS_X -= PLR_DIR_X * MS;
-	if (chmo(wolf, (int)(PLR_POS_Y - PLR_DIR_Y * MS - PLR_DIR_Y * 0.4),
-		(int)PLR_POS_X) <= '0')
-		PLR_POS_Y -= PLR_DIR_Y * MS;
+	if (i == 1)
+	{
+		if (chmo(wolf,(int)PLR_POS_Y, (int)(PLR_POS_X - PLR_DIR_Y * MS - PLR_DIR_Y * 0.4)) <= '0')
+			PLR_POS_X -= PLR_DIR_Y * MS;
+		if (chmo(wolf,(int)(PLR_POS_Y + PLR_DIR_X * MS + PLR_DIR_X * 0.4),(int)PLR_POS_X) <= '0')
+			PLR_POS_Y += PLR_DIR_X * MS;
+	}
+	else
+	{
+		if (chmo(wolf, (int)(PLR_POS_Y), (int)(PLR_POS_X + PLR_DIR_Y * MS + PLR_DIR_Y *
+			0.4)) <= '0')
+				PLR_POS_X += PLR_DIR_Y * MS;
+		if (chmo(wolf, (int)(PLR_POS_Y  - PLR_DIR_X * MS - PLR_DIR_X * 0.4),(int)(PLR_POS_X)) <= '0')
+			PLR_POS_Y -= PLR_DIR_X * MS;
+	}
 }
 
 void	rotate_left(t_wolf *wolf)
