@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 16:41:15 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 12:32:53 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:36:20 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	move_forward_back(t_wolf *wolf, int i)
 {
 	if (i == 1)
 	{
-		if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS + PLR_DIR_X *
-			0.4)) <= '0')
+		if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS +
+			PLR_DIR_X * 0.4)) <= '0')
 			PLR_POS_X += PLR_DIR_X * MS;
 		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y * MS + PLR_DIR_Y * 0.4),
 			(int)PLR_POS_X) <= '0')
@@ -25,30 +25,35 @@ void	move_forward_back(t_wolf *wolf, int i)
 	}
 	else
 	{
-		if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS - PLR_DIR_X *
+		if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X + PLR_DIR_X * MS -
+			PLR_DIR_X *
 			0.4)) <= '0')
 			PLR_POS_X -= PLR_DIR_X * MS;
 		if (chmo(wolf, (int)(PLR_POS_Y - PLR_DIR_Y * MS - PLR_DIR_Y * 0.4),
 			(int)PLR_POS_X) <= '0')
 			PLR_POS_Y -= PLR_DIR_Y * MS;
-		}
+	}
 }
 
 void	move_left_right(t_wolf *wolf, int i)
 {
 	if (i == 1)
 	{
-		if (chmo(wolf,(int)PLR_POS_Y, (int)(PLR_POS_X - PLR_DIR_Y * MS - PLR_DIR_Y * 0.4)) <= '0')
+		if (chmo(wolf, (int)PLR_POS_Y, (int)(PLR_POS_X - PLR_DIR_Y * MS -
+			PLR_DIR_Y * 0.4)) <= '0')
 			PLR_POS_X -= PLR_DIR_Y * (MS / 4 * 3);
-		if (chmo(wolf,(int)(PLR_POS_Y + PLR_DIR_X * MS + PLR_DIR_X * 0.4),(int)PLR_POS_X) <= '0')
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_X * MS + PLR_DIR_X * 0.4),
+			(int)PLR_POS_X) <= '0')
 			PLR_POS_Y += PLR_DIR_X * (MS / 4 * 3);
 	}
 	else
 	{
-		if (chmo(wolf, (int)(PLR_POS_Y), (int)(PLR_POS_X + PLR_DIR_Y * MS + PLR_DIR_Y *
+		if (chmo(wolf, (int)(PLR_POS_Y), (int)(PLR_POS_X + PLR_DIR_Y * MS +
+			PLR_DIR_Y *
 			0.4)) <= '0')
-				PLR_POS_X += PLR_DIR_Y * (MS / 4 * 3);
-		if (chmo(wolf, (int)(PLR_POS_Y  - PLR_DIR_X * MS - PLR_DIR_X * 0.4),(int)(PLR_POS_X)) <= '0')
+			PLR_POS_X += PLR_DIR_Y * (MS / 4 * 3);
+		if (chmo(wolf, (int)(PLR_POS_Y - PLR_DIR_X * MS - PLR_DIR_X * 0.4),
+			(int)(PLR_POS_X)) <= '0')
 			PLR_POS_Y -= PLR_DIR_X * (MS / 4 * 3);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 14:19:22 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:01:47 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@
 # define PLR_PL_X wolf->plr.plane.x
 # define PLR_PL_Y wolf->plr.plane.y
 # define MAP_SIDE wolf->mapa.side
+# define CH_X (int)(PLR_POS_X + 1.5 * PLR_DIR_X)
 
 # include "../libft/libft.h"
 # include <math.h>
@@ -51,8 +52,6 @@
 # include <fcntl.h>
 # include <time.h>
 # include <pthread.h>
-
-#include <stdio.h>
 
 typedef unsigned char	t_bool;
 
@@ -147,8 +146,6 @@ typedef struct		s_wolf
 	int				ch1;
 	int				ch2;
 
-
-	int				spriteorder[SPR];
 	int				mus;
 	int				y;
 	int				lvl;
@@ -156,9 +153,6 @@ typedef struct		s_wolf
 	int				ycolor;
 	int				xycolor;
 
-	double			spritedistance[SPR];
-	double			sprite_x;
-	double			sprite_y;
 	double			dist_wall;
 	double			dist_plr;
 	double			dist_cur;
@@ -212,6 +206,8 @@ void				restart(t_wolf *wolf, double x, double y, int lvl);
 void				free_mass(t_wolf *wolf);
 void				cheats(int keycode, t_wolf *wolf);
 void				cheats2(int keycode, t_wolf *wolf);
+void				keys_norm(int keycode, t_wolf *wolf);
+void				menu_norm(t_wolf *wolf);
 int					close_x(void *par);
 void				ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb);
 int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);

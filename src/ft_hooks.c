@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 14:19:36 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:00:13 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,41 +29,11 @@ int		keys_press(int keycode, t_wolf *wolf)
 	cheats(keycode, wolf);
 	cheats2(keycode, wolf);
 	(keycode == 67) ? exit(333) : 1337;
-	if (keycode == 14)
-	{
-		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)) == 'B')
-			restart(wolf, 8.5, 8.5, 1);
-		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)) == '9')
-			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-				PLR_DIR_X)] = '+';
-		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)) == '>')
-		{
-			if (wolf->vov != 5)
-			{
-				wolf->vov += 1;
-				wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-					PLR_DIR_X)] = '0';
-			}
-		}
-		else if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)) == '5')
-			{
-				if (wolf->lvl == 1 && wolf->vov == 5)
-					restart(wolf, 29.5, 1.5, 2);
-				else if (wolf->lvl == 2)
-					wolf->men.menu = 2;
-					//restart(wolf, 40.5, 5.5, 3);
-			}
-	}
+	keys_norm(keycode, wolf);
 	if (keycode == 12)
 	{
-		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)) == '+')
-			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-				PLR_DIR_X)] = '9';
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '+')
+			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '9';
 	}
 	(keycode == 257) ? wolf->key.shf = 1 : 1488;
 	if (keycode == 53)
@@ -109,13 +79,11 @@ int		ft_hooks(t_wolf *wolf)
 	mlx_hook(wolf->win, 3, 2, keys_release, wolf);
 	mlx_hook(wolf->win, 17, 0L, close_x, wolf);
 	if (wolf->men.menu == 0)
-	{
-		raycasting(wolf);
-		ft_print_info(wolf);
-	}
+		menu_norm(wolf);
 	if (wolf->men.menu == 1)
 	{
-		mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->menu[wolf->men.flag].img, 0, 0);
+		mlx_put_image_to_window(wolf->mlx, wolf->win,
+			wolf->menu[wolf->men.flag].img, 0, 0);
 		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
 	}
 	if (wolf->men.menu == 2)

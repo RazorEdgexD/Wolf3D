@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/09 20:09:32 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 20:06:56 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:00:44 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int		close_x(void *par)
 
 void	restart(t_wolf *wolf, double x, double y, int lvl)
 {
-//	pthread_create(&wolf->tread[0], NULL, music, NULL);
+	pthread_create(&wolf->tread[0], NULL, music, NULL);
 	free_mass(wolf);
 	wolf->men.menu = 0;
 	wolf->lvl = lvl;

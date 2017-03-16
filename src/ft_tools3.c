@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:10:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 14:19:33 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:59:16 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,28 +48,48 @@ void	cheats(int keycode, t_wolf *wolf)
 
 void	cheats2(int keycode, t_wolf *wolf)
 {
-	if (keycode == 86 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-		PLR_DIR_X)) == '0')
-		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)] = ':';
-	if (keycode == 87 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-		PLR_DIR_X)) == '0')
-		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)] = ';';
-	if (keycode == 88 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-		PLR_DIR_X)) == '0')
-		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)] = '<';
-	if (keycode == 89 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-		PLR_DIR_X)) == '0')
-		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)] = '=';
-	if (keycode == 91 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-		PLR_DIR_X)) == '0')
-		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)] = '>';
-	if (keycode == 92 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
-		PLR_DIR_X)) == '0')
-		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
-			PLR_DIR_X)] = '?';
+	if (keycode == 86 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = ':';
+	if (keycode == 87 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = ';';
+	if (keycode == 88 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '<';
+	if (keycode == 89 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '=';
+	if (keycode == 91 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '>';
+	if (keycode == 92 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '?';
+}
+
+void	keys_norm(int keycode, t_wolf *wolf)
+{
+	if (keycode == 14)
+	{
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == 'B')
+			restart(wolf, 8.5, 8.5, 1);
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '9')
+			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '+';
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '>')
+		{
+			if (wolf->vov != 5)
+			{
+				wolf->vov += 1;
+				wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '0';
+			}
+		}
+		else if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '5')
+		{
+			if (wolf->lvl == 1 && wolf->vov == 5)
+				restart(wolf, 29.5, 1.5, 2);
+			else if (wolf->lvl == 2)
+				wolf->men.menu = 2;
+		}
+	}
+}
+
+void	menu_norm(t_wolf *wolf)
+{
+	raycasting(wolf);
+	ft_print_info(wolf);
 }

@@ -6,7 +6,7 @@
 #    By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/12/08 13:28:10 by aosobliv          #+#    #+#              #
-#    Updated: 2017/03/15 17:19:44 by aosobliv         ###   ########.fr        #
+#    Updated: 2017/03/16 15:02:06 by aosobliv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ IDIR = includes/
 
 VPATH = src:includes
 
-FLAGS = -Wall -Wextra -Werror -I$(IDIR) -g #-O3
+FLAGS = -Wall -Wextra -Werror -I$(IDIR) -O3
 
 MLX = -lmlx -framework AppKit -framework OpenGl
 

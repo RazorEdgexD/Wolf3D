@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 20:05:34 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 13:37:56 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:40:22 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ void	load_walls(t_wolf *wolf)
 			&wolf->wall[7].height);
 	wolf->wall[6].img = mlx_xpm_file_to_image(wolf->mlx, "texture/pol_good.xpm",
 		&wolf->wall[6].width, &wolf->wall[6].height);
-	wolf->wall[8].img = mlx_xpm_file_to_image(wolf->mlx, "texture/door_wood.xpm",
-		&wolf->wall[8].width, &wolf->wall[8].height);
+	wolf->wall[8].img = mlx_xpm_file_to_image(wolf->mlx, "texture/door_wood.xpm"
+		, &wolf->wall[8].width, &wolf->wall[8].height);
 }
-
 
 void	load_menu(t_wolf *wolf)
 {
@@ -65,7 +64,8 @@ void	load_sprite(t_wolf *wolf)
 	wolf->wall[14].img = mlx_xpm_file_to_image(wolf->mlx, "texture/san.xpm",
 		&wolf->wall[14].width, &wolf->wall[14].height);
 	wolf->wall[15].img = mlx_xpm_file_to_image(wolf->mlx,
-		"texture/purplestone.xpm", &wolf->wall[15].width, &wolf->wall[15].height);
+		"texture/purplestone.xpm", &wolf->wall[15].width,
+			&wolf->wall[15].height);
 	wolf->wall[16].img = mlx_xpm_file_to_image(wolf->mlx, "texture/mossy.xpm",
 		&wolf->wall[16].width, &wolf->wall[16].height);
 	wolf->wall[17].img = mlx_xpm_file_to_image(wolf->mlx, "texture/hand.xpm",

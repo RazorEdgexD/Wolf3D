@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:04:22 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 14:12:24 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 15:00:48 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void	init_wolf(t_wolf *wolf)
 	wolf->ch = 0;
 	wolf->ch1 = 0;
 	wolf->ch2 = 0;
-
 	PLR_POS_X = 1.5;
 	PLR_POS_Y = 1.5;
 	wolf->mlx = mlx_init();
@@ -66,18 +65,16 @@ void	*music_start(void *lol)
 	return (NULL);
 }
 
-
-
 int		main(void)
 {
-	t_wolf		wolf;
+	t_wolf	wolf;
 
 	wolf.i = -1;
 	wolf.men.flag = 0;
 	wolf.mus = 1;
 	init_wolf(&wolf);
 	read_map("maps/big.wolf", &wolf);
-	//pthread_create(&wolf.tread[1], NULL, music_start, NULL);
+	pthread_create(&wolf.tread[1], NULL, music_start, NULL);
 	init_player(&wolf);
 	load_texture(&wolf);
 	mlx_loop_hook(wolf.mlx, ft_hooks, &wolf);
