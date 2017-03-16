@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 20:16:36 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:19:22 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,14 +142,11 @@ typedef struct		s_wolf
 	int				text_y;
 	int				f_text_x;
 	int				f_text_y;
-	int				s_s_x;
-	int				spr_hei;
-	int				spr_wid;
-	int				dr_s_y;
-	int				dr_e_y;
-	int				dr_s_x;
-	int				dr_e_x;
-	int				stripe;
+	int				vov;
+	int				ch;
+	int				ch1;
+	int				ch2;
+
 
 	int				spriteorder[SPR];
 	int				mus;
@@ -179,7 +176,6 @@ typedef struct		s_wolf
 	char			**map_tmp;
 	char			*program_name;
 	char			**map;
-	char			buffer[WIN_X][WIN_Y];
 	char			*hint[4];
 
 	pthread_t		tread[2];
@@ -214,6 +210,8 @@ void				init_camera(t_wolf *wolf);
 void				load_texture(t_wolf *wolf);
 void				restart(t_wolf *wolf, double x, double y, int lvl);
 void				free_mass(t_wolf *wolf);
+void				cheats(int keycode, t_wolf *wolf);
+void				cheats2(int keycode, t_wolf *wolf);
 int					close_x(void *par);
 void				ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb);
 int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);

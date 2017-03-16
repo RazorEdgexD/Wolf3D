@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 19:48:39 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:19:36 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,36 @@ int		keys_release(int keycode, t_wolf *wolf)
 
 int		keys_press(int keycode, t_wolf *wolf)
 {
+	cheats(keycode, wolf);
+	cheats2(keycode, wolf);
 	(keycode == 67) ? exit(333) : 1337;
 	if (keycode == 14)
 	{
 		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
+			PLR_DIR_X)) == 'B')
+			restart(wolf, 8.5, 8.5, 1);
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
 			PLR_DIR_X)) == '9')
 			wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
 				PLR_DIR_X)] = '+';
+		if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
+			PLR_DIR_X)) == '>')
+		{
+			if (wolf->vov != 5)
+			{
+				wolf->vov += 1;
+				wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][(int)(PLR_POS_X + 1.5 *
+					PLR_DIR_X)] = '0';
+			}
+		}
 		else if (chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), (int)(PLR_POS_X + 1.5 *
 			PLR_DIR_X)) == '5')
 			{
-				if (wolf->lvl == 1)
+				if (wolf->lvl == 1 && wolf->vov == 5)
 					restart(wolf, 29.5, 1.5, 2);
 				else if (wolf->lvl == 2)
-					restart(wolf, 40.5, 20.5, 3);
+					wolf->men.menu = 2;
+					//restart(wolf, 40.5, 5.5, 3);
 			}
 	}
 	if (keycode == 12)
@@ -71,7 +87,7 @@ int		keys_menu(int key, t_wolf *wolf)
 	if (key == 126 && wolf->men.flag > 0)
 		wolf->men.flag -= 1;
 	if (key == 36 && wolf->men.flag == 0)
-		restart(wolf, 8.5, 8.5, 1);
+		restart(wolf, 40.5, 20.5, 0);
 	if (key == 36 && wolf->men.flag == 1)
 		ft_putendl("ABTOP Razorywka");
 	if (key == 36 && wolf->men.flag == 2)
@@ -81,8 +97,8 @@ int		keys_menu(int key, t_wolf *wolf)
 
 int		ft_hooks(t_wolf *wolf)
 {
-	(wolf->key.shf == 1) ? wolf->ms_k = 4.1 : 1488;
-	(wolf->key.shf == 0) ? wolf->ms_k = 3 : 1488;
+	(wolf->key.shf == 1) ? wolf->ms_k = 3.8 : 1488;
+	(wolf->key.shf == 0) ? wolf->ms_k = 2.5 : 1488;
 	(wolf->key.l == 1) ? rotate_left(wolf) : 1488;
 	(wolf->key.r == 1) ? rotate_right(wolf) : 1488;
 	(wolf->key.a == 1) ? move_left_right(wolf, 1) : 1488;
@@ -100,6 +116,11 @@ int		ft_hooks(t_wolf *wolf)
 	if (wolf->men.menu == 1)
 	{
 		mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->menu[wolf->men.flag].img, 0, 0);
+		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
+	}
+	if (wolf->men.menu == 2)
+	{
+		mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->menu[3].img, 0, 0);
 		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
 	}
 	return (0);

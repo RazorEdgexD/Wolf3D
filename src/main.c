@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:04:22 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 18:06:45 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:12:24 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_player(t_wolf *wolf)
 	wolf->old_time = 0;
 	wolf->move_speed = 0;
 	wolf->rot_speed = 0;
-	wolf->ms_k = 3;
+	wolf->ms_k = 2.5;
 }
 
 void	init_wolf(t_wolf *wolf)
@@ -33,6 +33,10 @@ void	init_wolf(t_wolf *wolf)
 	wolf->color = 255;
 	wolf->men.menu = 1;
 	wolf->lvl = 1;
+	wolf->ch = 0;
+	wolf->ch1 = 0;
+	wolf->ch2 = 0;
+
 	PLR_POS_X = 1.5;
 	PLR_POS_Y = 1.5;
 	wolf->mlx = mlx_init();
@@ -64,25 +68,19 @@ void	*music_start(void *lol)
 
 
 
-int		main(int argc, char **argv)
+int		main(void)
 {
 	t_wolf		wolf;
 
-
-	if (argc == 2)
-	{
-		wolf.i = -1;
-		wolf.men.flag = 0;
-		wolf.mus = 1;
-		init_wolf(&wolf);
-		read_map(argv[1], &wolf);
-		//pthread_create(&wolf.tread[1], NULL, music_start, NULL);
-		init_player(&wolf);
-		load_texture(&wolf);
-		mlx_loop_hook(wolf.mlx, ft_hooks, &wolf);
-		mlx_loop(wolf.mlx);
-	}
-	else
-		ft_error(5);
+	wolf.i = -1;
+	wolf.men.flag = 0;
+	wolf.mus = 1;
+	init_wolf(&wolf);
+	read_map("maps/big.wolf", &wolf);
+	//pthread_create(&wolf.tread[1], NULL, music_start, NULL);
+	init_player(&wolf);
+	load_texture(&wolf);
+	mlx_loop_hook(wolf.mlx, ft_hooks, &wolf);
+	mlx_loop(wolf.mlx);
 	return (0);
 }

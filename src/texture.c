@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 20:05:34 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 19:18:47 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 13:37:56 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	load_walls(t_wolf *wolf)
 {
-	wolf->wall = (t_img *)malloc(sizeof(t_img) * 17);
+	wolf->wall = (t_img *)malloc(sizeof(t_img) * 18);
 	wolf->wall[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/e18.xpm",
 		&wolf->wall[0].width, &wolf->wall[0].height);
 	wolf->wall[1].img = mlx_xpm_file_to_image(wolf->mlx, "texture/wall_1.xpm"
@@ -39,13 +39,15 @@ void	load_walls(t_wolf *wolf)
 
 void	load_menu(t_wolf *wolf)
 {
-	wolf->menu = (t_img *)malloc(sizeof(t_img) * 3);
+	wolf->menu = (t_img *)malloc(sizeof(t_img) * 4);
 	wolf->menu[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/newgame.xpm",
 		&wolf->menu[0].width, &wolf->menu[0].height);
 	wolf->menu[1].img = mlx_xpm_file_to_image(wolf->mlx, "texture/wolfabout.xpm"
 		, &wolf->menu[1].width, &wolf->menu[1].height);
 	wolf->menu[2].img = mlx_xpm_file_to_image(wolf->mlx,
 		"texture/wolfquit.xpm", &wolf->menu[2].width, &wolf->menu[2].height);
+	wolf->menu[3].img = mlx_xpm_file_to_image(wolf->mlx, "texture/winner.xpm",
+		&wolf->menu[3].width, &wolf->menu[3].height);
 }
 
 void	load_sprite(t_wolf *wolf)
@@ -66,6 +68,8 @@ void	load_sprite(t_wolf *wolf)
 		"texture/purplestone.xpm", &wolf->wall[15].width, &wolf->wall[15].height);
 	wolf->wall[16].img = mlx_xpm_file_to_image(wolf->mlx, "texture/mossy.xpm",
 		&wolf->wall[16].width, &wolf->wall[16].height);
+	wolf->wall[17].img = mlx_xpm_file_to_image(wolf->mlx, "texture/hand.xpm",
+		&wolf->wall[17].width, &wolf->wall[17].height);
 }
 
 void	load_texture(t_wolf *wolf)

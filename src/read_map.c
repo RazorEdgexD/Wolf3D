@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:20:11 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/15 20:39:46 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 14:13:09 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	make_arr(t_wolf *wolf, int fd)
 	int		i;
 	int		j;
 	char	*line;
-//	char	**tmp;
 
 	i = 0;
 	j = 0;
@@ -73,30 +72,6 @@ void	make_arr(t_wolf *wolf, int fd)
 	}
 	free(line);
 }
-
-// void	wall_check(t_wolf *wolf)
-// {
-// 	int		i;
-// 	int		j;
-// 	int		all_wall;
-//
-// 	all_wall = 1;
-// 	i = -1;
-// 	j = -1;
-// 	while (++i != wolf->map_height)
-// 	{
-// 		j = -1;
-// 		while (++j != wolf->map_len)
-// 		{
-// 			printf("%c|", wolf->map[i][j]);
-// 			if (wolf->map[i][j] != '1')
-// 				all_wall = 0;
-// 		}
-// 		printf("\n");
-// 	}
-// 	if (all_wall == 1)
-// 		ft_error(3);
-// }
 
 void	read_map(char *map, t_wolf *wolf)
 {
