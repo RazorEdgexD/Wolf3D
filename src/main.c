@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:04:22 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 15:00:48 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/18 12:55:30 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	init_wolf(t_wolf *wolf)
 	wolf->ch = 0;
 	wolf->ch1 = 0;
 	wolf->ch2 = 0;
-	PLR_POS_X = 1.5;
-	PLR_POS_Y = 1.5;
+	PLR_POS_X = 40.5;
+	PLR_POS_Y = 20.5;
 	wolf->mlx = mlx_init();
 	wolf->win = mlx_new_window(wolf->mlx, WIN_X, WIN_Y, "Wolf3D by Razor");
 	wolf->image = mlx_new_image(wolf->mlx, WIN_X, WIN_Y);

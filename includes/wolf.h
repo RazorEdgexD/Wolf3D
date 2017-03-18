@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/02/27 19:01:01 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 15:01:47 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 16:11:30 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,8 +207,9 @@ void				free_mass(t_wolf *wolf);
 void				cheats(int keycode, t_wolf *wolf);
 void				cheats2(int keycode, t_wolf *wolf);
 void				keys_norm(int keycode, t_wolf *wolf);
-void				menu_norm(t_wolf *wolf);
+void				menu_norm(t_wolf *wolf, int i);
 int					close_x(void *par);
+int					keys_menu(int key, t_wolf *wolf);
 void				ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb);
 int					ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf);
 char				chmo(t_wolf *wolf, int y, int x);

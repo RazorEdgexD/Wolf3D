@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/01 15:20:11 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 15:02:20 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/18 12:29:47 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,14 @@ void	make_arr(t_wolf *wolf, int fd)
 	char	*line;
 
 	i = 0;
-	wolf->map = (char **)malloc(sizeof(char *) * (wolf->map_height * 200));
-	wolf->map_tmp = (char **)malloc(sizeof(char *) * (wolf->map_height * 200));
+	wolf->map = (char **)malloc(sizeof(char *) * (wolf->map_height + 1));
+	wolf->map_tmp = (char **)malloc(sizeof(char *) * (wolf->map_height + 1));
 	wolf->map[wolf->map_height] = NULL;
 	wolf->map_tmp[wolf->map_height] = NULL;
 	while (get_next_line(fd, &line) == 1)
 	{
-		wolf->map[i] = (char *)malloc(sizeof(char) * (wolf->map_len * 200));
-		wolf->map_tmp[i] = (char *)malloc(sizeof(char) * (wolf->map_len * 200));
+		wolf->map[i] = (char *)malloc(sizeof(char) * (wolf->map_len + 1));
+		wolf->map_tmp[i] = (char *)malloc(sizeof(char) * (wolf->map_len + 1));
 		wolf->map[i][wolf->map_len] = '\0';
 		wolf->map_tmp[i][wolf->map_len] = '\0';
 		j = -1;

@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/02 15:32:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 15:00:13 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/18 13:02:43 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,12 @@ int		keys_menu(int key, t_wolf *wolf)
 {
 	(key == 67) ? exit(333) : 1337;
 	if (key == 53)
-		wolf->men.menu = 0;
+	{
+		if (wolf->men.flag == 1)
+			wolf->men.menu = 1;
+		else
+			wolf->men.menu = 0;
+	}
 	if (key == 125 && wolf->men.flag < 2)
 		wolf->men.flag += 1;
 	if (key == 126 && wolf->men.flag > 0)
@@ -59,7 +64,11 @@ int		keys_menu(int key, t_wolf *wolf)
 	if (key == 36 && wolf->men.flag == 0)
 		restart(wolf, 40.5, 20.5, 0);
 	if (key == 36 && wolf->men.flag == 1)
-		ft_putendl("ABTOP Razorywka");
+	{
+		ft_putendl("ABTOP    -   RAZOR");
+		ft_putendl("ABTOP MEHU - KOS");
+		wolf->men.menu = 3;
+	}
 	if (key == 36 && wolf->men.flag == 2)
 		exit(777);
 	return (1);
@@ -79,17 +88,12 @@ int		ft_hooks(t_wolf *wolf)
 	mlx_hook(wolf->win, 3, 2, keys_release, wolf);
 	mlx_hook(wolf->win, 17, 0L, close_x, wolf);
 	if (wolf->men.menu == 0)
-		menu_norm(wolf);
+		menu_norm(wolf, 0);
 	if (wolf->men.menu == 1)
-	{
-		mlx_put_image_to_window(wolf->mlx, wolf->win,
-			wolf->menu[wolf->men.flag].img, 0, 0);
-		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
-	}
+		menu_norm(wolf, 1);
 	if (wolf->men.menu == 2)
-	{
-		mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->menu[3].img, 0, 0);
-		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
-	}
+		menu_norm(wolf, 2);
+	if (wolf->men.menu == 3)
+		menu_norm(wolf, 3);
 	return (0);
 }

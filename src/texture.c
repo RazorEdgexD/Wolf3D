@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/03 20:05:34 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 14:40:22 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/16 16:01:40 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	load_walls(t_wolf *wolf)
 
 void	load_menu(t_wolf *wolf)
 {
-	wolf->menu = (t_img *)malloc(sizeof(t_img) * 4);
+	wolf->menu = (t_img *)malloc(sizeof(t_img) * 5);
 	wolf->menu[0].img = mlx_xpm_file_to_image(wolf->mlx, "texture/newgame.xpm",
 		&wolf->menu[0].width, &wolf->menu[0].height);
 	wolf->menu[1].img = mlx_xpm_file_to_image(wolf->mlx, "texture/wolfabout.xpm"
@@ -47,6 +47,8 @@ void	load_menu(t_wolf *wolf)
 		"texture/wolfquit.xpm", &wolf->menu[2].width, &wolf->menu[2].height);
 	wolf->menu[3].img = mlx_xpm_file_to_image(wolf->mlx, "texture/winner.xpm",
 		&wolf->menu[3].width, &wolf->menu[3].height);
+	wolf->menu[4].img = mlx_xpm_file_to_image(wolf->mlx, "texture/wolf.xpm",
+		&wolf->menu[4].width, &wolf->menu[4].height);
 }
 
 void	load_sprite(t_wolf *wolf)

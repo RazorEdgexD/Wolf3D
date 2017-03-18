@@ -6,13 +6,13 @@
 #    By: aosobliv <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/11/24 18:13:20 by aosobliv          #+#    #+#              #
-#    Updated: 2017/01/19 16:55:25 by aosobliv         ###   ########.fr        #
+#    Updated: 2017/03/18 12:33:07 by aosobliv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O3
 
 SRCS = ft_putchar.c         \
 	   ft_putchar_fd.c		\

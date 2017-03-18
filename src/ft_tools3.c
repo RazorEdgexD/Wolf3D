@@ -6,7 +6,7 @@
 /*   By: aosobliv <aosobliv@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/11 14:10:13 by aosobliv          #+#    #+#             */
-/*   Updated: 2017/03/16 14:59:16 by aosobliv         ###   ########.fr       */
+/*   Updated: 2017/03/18 12:54:03 by aosobliv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,17 +48,23 @@ void	cheats(int keycode, t_wolf *wolf)
 
 void	cheats2(int keycode, t_wolf *wolf)
 {
-	if (keycode == 86 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+	if (keycode == 86 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0'
+		&& wolf->ch == 1 && wolf->ch1 == 1 && wolf->ch2 == 1)
 		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = ':';
-	if (keycode == 87 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+	if (keycode == 87 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0'
+		&& wolf->ch == 1 && wolf->ch1 == 1 && wolf->ch2 == 1)
 		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = ';';
-	if (keycode == 88 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+	if (keycode == 88 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0'
+		&& wolf->ch == 1 && wolf->ch1 == 1 && wolf->ch2 == 1)
 		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '<';
-	if (keycode == 89 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+	if (keycode == 89 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0'
+		&& wolf->ch == 1 && wolf->ch1 == 1 && wolf->ch2 == 1)
 		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '=';
-	if (keycode == 91 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+	if (keycode == 91 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0'
+		&& wolf->ch == 1 && wolf->ch1 == 1 && wolf->ch2 == 1)
 		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '>';
-	if (keycode == 92 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0')
+	if (keycode == 92 && chmo(wolf, (int)(PLR_POS_Y + PLR_DIR_Y), CH_X) == '0'
+		&& wolf->ch == 1 && wolf->ch1 == 1 && wolf->ch2 == 1)
 		wolf->map[(int)(PLR_POS_Y + PLR_DIR_Y)][CH_X] = '?';
 }
 
@@ -88,8 +94,27 @@ void	keys_norm(int keycode, t_wolf *wolf)
 	}
 }
 
-void	menu_norm(t_wolf *wolf)
+void	menu_norm(t_wolf *wolf, int i)
 {
-	raycasting(wolf);
-	ft_print_info(wolf);
+	if (i == 0)
+	{
+		raycasting(wolf);
+		ft_print_info(wolf);
+	}
+	if (i == 1)
+	{
+		mlx_put_image_to_window(wolf->mlx, wolf->win,
+			wolf->menu[wolf->men.flag].img, 0, 0);
+		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
+	}
+	if (i == 2)
+	{
+		mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->menu[3].img, 0, 0);
+		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
+	}
+	if (i == 3)
+	{
+		mlx_put_image_to_window(wolf->mlx, wolf->win, wolf->menu[4].img, 0, 0);
+		mlx_hook(wolf->win, 2, 1, keys_menu, wolf);
+	}
 }
