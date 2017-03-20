@@ -23,7 +23,7 @@ void	ft_image_pixel_put(t_wolf *wolf, int x, int y, int rgb)
 	image = mlx_get_data_addr(wolf->image, &bpp, &sl, &en);
 	tmp = (mlx_get_color_value(wolf->mlx, rgb));
 	if (x > 0 && x < WIN_X && y > 0 && y < WIN_Y)
-		ft_memcpy((void *)(image + y * WIN_X * (bpp / 8)) + x * (bpp / 8),
+		memcpy((void *)(image + y * WIN_X * (bpp / 8)) + x * (bpp / 8),
 			(void *)&tmp, 4);
 }
 
@@ -39,7 +39,7 @@ int		ft_image_pixel_get(int x, int y, t_img *img, t_wolf *wolf)
 	wolf->color = 0;
 	image = mlx_get_data_addr(img->img, &bpp, &sl, &en);
 	if (x >= 0 && x < img->width && y >= 0 && y < img->height)
-		ft_memcpy((void *)(&tmp), (void *)((image + y * img->width * (bpp / 8))
+		memcpy((void *)(&tmp), (void *)((image + y * img->width * (bpp / 8))
 			+ x * (bpp / 8)), 4);
 	return (tmp);
 }
